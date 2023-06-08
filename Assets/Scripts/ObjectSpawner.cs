@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoadLineSpawner : MonoBehaviour
+public class ObjectSpawner : MonoBehaviour
 {
     public GameObject objectPrefab;         // The prefab of the object to spawn
     public float spawnInterval = 5f;        // Time interval between spawns
@@ -25,7 +25,7 @@ public class RoadLineSpawner : MonoBehaviour
     void SpawnObject()
     {
         // Instantiate the object prefab
-        GameObject newObject = Instantiate(objectPrefab, transform.position, Quaternion.Euler(90,0,0));
+        GameObject newObject = Instantiate(objectPrefab, transform.position, Quaternion.identity);
 
         // Destroy the object after a certain duration
         Destroy(newObject, objectDuration);

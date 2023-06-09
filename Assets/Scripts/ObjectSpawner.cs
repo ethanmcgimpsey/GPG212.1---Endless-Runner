@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
-    public GameObject objectPrefab;         // The prefab of the object to spawn
-    public float spawnInterval = 5f;        // Time interval between spawns
-    public float objectDuration = 10f;      // Duration before the object is destroyed
-    private float timer = 3f;
+    public GameObject objectPrefab;
+    public GameObject[] spawners;
+    public float spawnInterval = 5f;
+    public float objectDuration = 10f;
+    public float timer = 3f;
 
     void Update()
     {
@@ -24,8 +25,10 @@ public class ObjectSpawner : MonoBehaviour
 
     void SpawnObject()
     {
+        int selectedIndex = Random.Range(0, spawners.Length);
+        
         // Instantiate the object prefab
-        GameObject newObject = Instantiate(objectPrefab, transform.position, Quaternion.identity);
+        GameObject newObject = Instantiate(objectPrefab, spawners[selectedIndex].transform.position, Quaternion.identity);
 
         // Destroy the object after a certain duration
         Destroy(newObject, objectDuration);

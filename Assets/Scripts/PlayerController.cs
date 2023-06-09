@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 5f;
 
     private Rigidbody playerRigidbody;
+    public GameObject gameOver;
 
 
     // Start is called before the first frame update
@@ -21,13 +22,17 @@ public class PlayerController : MonoBehaviour
     {
         // playerRigidbody.velocity = new Vector3(0f, playerRigidbody.velocity.y, moveSpeed);
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
-
         float moveHorizontal = Input.GetAxis("Horizontal");
         Vector3 movement = new Vector3(moveHorizontal, 0f, 0f);
         playerRigidbody.velocity = movement * moveSpeed;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Zombie")
+        {
+            Debug.Log("You dead");
+            gameOver.SetActive(true);
+        }
     }
 }
